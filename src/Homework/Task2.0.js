@@ -21,38 +21,77 @@ console.log(binary_Search(array, 1));
 console.log(binary_Search(array, 5));
 
 console.log('Task 2 result------------------------------------');
-let sum = (array1, array2) => {
+
+function displayDelay(result) {
+    let i = 0;
+
+    function loop() {
+        console.log(result[i]);
+        i++;
+        if (result[i] === undefined)
+            return;
+        else
+            setTimeout(loop, 2000);
+        console.log('...1 second delay');
+    }
+    loop();
+}
+
+let sumOfEqualsArrays = (array1,array2) =>  {
+    let result = [];
+    if (array1.length === array2.length) {
+        for (let i = 0; i < array1.length; i++) {
+            result.push(array1[i] + array2[i]);
+        }
+    }
+    displayDelay(result);
+};
+
+let sumIfArray1IsBigger = (array1, array2) => {
     let result = [];
     if (array1.length > array2.length) {
         for (let i = 0; i < array2.length; i++) {
             result.push(array1[i] + array2[i]);
-            if (array2[i] === array2[array2.length-1]) {
+            if (i === array2.length-1) {
                 for (; i < array1.length - 1; i ++ ) {
                     result.push(array1[i+1]);
                 }
             }
         }
     }
-    if (array1.length < array2.length) {
-        for (let i = 0; i < array1.length; i++) {
-            result.push(array1[i] + array2[i]);
-            if (array1[i] === array1[array1.length - 1]) {
-                for (; i < array2.length - 1; i++) {
-                    result.push(array2[i+1]);
-                }
-            }
-        }
-    } else {
-        for (let i = 0; i < array1.length; i++ ) {
-            result.push(array1[i] + array2[i]);
-        }
-    }
-    return result;
+    displayDelay(result);
 };
 
-array1 = [1,0,2,3,4];
-array2 = [3,5,6,7,8,13];
+let sumIfArray2IsBigger = (array1,array2) => {
+    let result = [];
+    if (array1.length < array2.length)
+        for (let i = 0; i < array1.length; i++) {
+            result.push(array1[i] + array2[i]);
+        if (i === array1.length - 1) {
+            for (; i < array2.length - 1; i++) {
+                result.push(array2[i + 1]);
+            }
+        }
+    }
+    displayDelay(result);
 
-console.log(sum(array2, array2));
+};
+
+let sum = (array1, array2) => {
+    if(array1.length > array2.length) {
+      sumIfArray1IsBigger(array1, array2);
+    } else if (array2.length > array1.length) {
+       sumIfArray2IsBigger(array1,array2);
+    } else {
+       sumOfEqualsArrays(array1, array2);
+    }
+};
+
+array22 = [1,0,2,3,4];
+array11 = [3,5,6,7,8,13];
+
+sum(array11,array22);
+
+
 
 
