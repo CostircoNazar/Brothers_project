@@ -116,6 +116,14 @@ const studentsList = [
 const compareCourses = (studentData, courses, literature) => {
     const { coursesList } = studentData;
 
+    const getStudentCourses = (courses, coursesList) => {
+        _.map(coursesList, (courseName) => _.find(courses, ({name}) => name === courseName));
+    };
+
+    const getCoursesLiterature = (literature, courseName) => {
+        _.find(literature, ({name}) => name == courseName)
+    }
+
     const studentCoursesData = getStudentCourses(courses, coursesList);
 
   // [{
@@ -133,15 +141,25 @@ const compareCourses = (studentData, courses, literature) => {
   //     exams: false,
   // }]
 
+    const literatureList = [];
     _.map(studentCoursesData, (courseValue) => {
         const { exams, name } = courseValue;
-
+        if (exams == true) {
+           literatureList.push( getCoursesLiterature(literature, name));
+        }
     })
 };
+//
+// name: 'philosophy',
+//     literature: [
+//     'Philosophy of the human life',
+//     'Creation of mind',
+//     'Ideas development'
+// ],
+//     reminder: '12-05-2019'
 
-const getStudentCourses = (courses, coursesList) => {
-    _.map(coursesList, (courseName) => _.find(courses, ({name}) => name === courseName));
-};
+
+
 
 // using student property "courseList"
 
