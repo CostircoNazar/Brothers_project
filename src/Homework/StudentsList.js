@@ -113,6 +113,36 @@ const studentsList = [
 ];
 
 
+const compareCourses = (studentData, courses, literature) => {
+    const { coursesList } = studentData;
+
+    const studentCoursesData = getStudentCourses(courses, coursesList);
+
+  // [{
+  //   name: 'philosophy',
+  //     exams: true,
+  //   examDate: '12-05-2019',
+  // },
+  // {
+  //   name: 'physics',
+  //     exams: true,
+  //   examDate: '18-05-2019',
+  // },
+  // {
+  //   name: 'economics',
+  //     exams: false,
+  // }]
+
+    _.map(studentCoursesData, (courseValue) => {
+        const { exams, name } = courseValue;
+
+    })
+};
+
+const getStudentCourses = (courses, coursesList) => {
+    _.map(coursesList, (courseName) => _.find(courses, ({name}) => name === courseName));
+};
+
 // using student property "courseList"
 
 let myStudentsList = new Object();
